@@ -1,13 +1,13 @@
-hash: 3b93f69bcdc11d8872492fa15eccb9be7419109d891009c190df141dcfa851ae
-updated: 2019-07-28T14:17:20.130894774-04:00
+hash: a0031bd1a2cbbf6fe6708d36292976c73efa03e7b2c828ce1ca3db6d554a8df1
+updated: 2019-12-03T06:00:07.160880708Z
 imports:
-- name: github.com/adjust/goautoneg
-  version: d788f35a0315672bc90f50a6145d1252a230ee0d
-  vcs: git
+- name: bitbucket.org/ww/goautoneg
+  version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
+  vcs: hg
 - name: github.com/arschles/assert
   version: 6882f85ccdc7c1822b146d1a6b0c2c48f91b5140
 - name: github.com/aws/aws-sdk-go
-  version: 49c3892b61af1d4996292a3025f36e4dfa25eaee
+  version: 3724cb09315309e00556944edfc2946859167973
   subpackages:
   - aws
   - aws/awserr
@@ -17,12 +17,26 @@ imports:
   - aws/corehandlers
   - aws/credentials
   - aws/credentials/ec2rolecreds
+  - aws/credentials/endpointcreds
+  - aws/credentials/processcreds
+  - aws/credentials/stscreds
+  - aws/csm
   - aws/defaults
   - aws/ec2metadata
+  - aws/endpoints
   - aws/request
   - aws/session
-  - private/endpoints
+  - aws/signer/v4
+  - internal/ini
+  - internal/s3err
+  - internal/sdkio
+  - internal/sdkmath
+  - internal/sdkrand
+  - internal/sdkuri
+  - internal/shareddefaults
   - private/protocol
+  - private/protocol/eventstream
+  - private/protocol/eventstream/eventstreamapi
   - private/protocol/json/jsonutil
   - private/protocol/jsonrpc
   - private/protocol/query
@@ -30,10 +44,12 @@ imports:
   - private/protocol/rest
   - private/protocol/restxml
   - private/protocol/xml/xmlutil
-  - private/signer/v4
-  - private/waiter
+  - service/cloudfront/sign
   - service/ecr
   - service/s3
+  - service/sts
+  - service/sts/stsiface
+  - vendor/github.com/jmespath/go-jmespath
 - name: github.com/Azure/azure-sdk-for-go
   version: 95361a2573b1fa92a00c5fc2707a80308483c6f9
   subpackages:
@@ -50,34 +66,9 @@ imports:
   version: 3e6e67c4dcea3ac2f25fd4731abc0e1deaf36216
   subpackages:
   - spew
-- name: github.com/teamhephy/builder
-  version: 1c98f0940c146a9ddaff640f56f81c4a84c2e087
-  subpackages:
-  - pkg
-  - pkg/cleaner
-  - pkg/conf
-  - pkg/controller
-  - pkg/git
-  - pkg/gitreceive
-  - pkg/healthsrv
-  - pkg/k8s
-  - pkg/sshd
-  - pkg/storage
-  - pkg/sys
-- name: github.com/teamhephy/controller-sdk-go
-  version: a1ffb4886a5f7f92fdd710b99e68c2555b74a703
-  subpackages:
-  - api
-  - hooks
-  - pkg/time
-- name: github.com/teamhephy/pkg
-  version: 777f37a30108edaf6a2bd4e423cde34ec12870fd
-  subpackages:
-  - log
-  - prettyprint
 - name: github.com/docker/distribution
-  version: 0afef00d5764404d70f86076f364551657d51de6
-  repo: https://github.com/teamhephy/distribution
+  version: 17bfe45724daa3b4d14314aeba34700ed286b02f
+  repo: https://github.com/jfuechsl/distribution
   vcs: git
   subpackages:
   - context
@@ -111,8 +102,6 @@ imports:
   - swagger
 - name: github.com/ghodss/yaml
   version: 73d445a93680fa1a78ae23a5839bad48f32ba1ee
-- name: github.com/go-ini/ini
-  version: afbd495e5aaea13597b5e14fe514ddeaa4d76fc3
 - name: github.com/golang/glog
   version: 44145f04b68cf362d9c4df2182967c2275eaefed
 - name: github.com/golang/protobuf
@@ -147,13 +136,13 @@ imports:
 - name: github.com/gorilla/mux
   version: e444e69cbd2e2e3e0749a2f3c717cec491552bbf
 - name: github.com/goware/urlx
-  version: 8bb4a2e4339f55b15164907177e96e9faf885504
+  version: 8ce059c8488383d3d5d917e99b51e5487b012698
 - name: github.com/jmespath/go-jmespath
   version: 0b12d6b521d83fc7f755e7cfc1b1fbdd35a01a74
 - name: github.com/juju/ratelimit
   version: 77ed1c8a01217656d2080ad51981f6e99adaa177
 - name: github.com/kelseyhightower/envconfig
-  version: 9aca109c9aec4633fced9717c4a09ecab3d33111
+  version: 0b417c4ec4a8a82eecc22a1459a504aa55163d61
 - name: github.com/matttproud/golang_protobuf_extensions
   version: fc2b8d3a73c4867e51861bbdd5ae3c1f0869dd6a
   subpackages:
@@ -173,7 +162,7 @@ imports:
   - libcontainer/configs
   - libcontainer/system
 - name: github.com/pborman/uuid
-  version: ca53cad383cad2479bbba7f7a1a05797ec1386e4
+  version: e790cca94e6cc75c7064b1332e63811d4aae1a53
 - name: github.com/prometheus/client_golang
   version: 3b78d7a77f51ccbc364d4bc170920153022cfd08
   subpackages:
@@ -183,16 +172,16 @@ imports:
   subpackages:
   - go
 - name: github.com/prometheus/common
-  version: 1f0ade24887d8d64b3e271ac7264d91fbe3f7654
+  version: ef7a9a5fb138aa5d3a19988537606226869a0390
   subpackages:
   - expfmt
   - model
 - name: github.com/prometheus/procfs
   version: 490cc6eb5fa45bf8a8b7b73c8bc82a8160e8531d
 - name: github.com/PuerkitoBio/purell
-  version: 8a290539e2e8629dbc4e6bad948158f790ec31f4
+  version: 44968752391892e1b0d0b821ee79e9a85fa13049
 - name: github.com/PuerkitoBio/urlesc
-  version: 5bd2802263f21d8788851d5305584c82a5c75d7e
+  version: de5bf2ad457846296e2031421a34e2568e304e35
 - name: github.com/Sirupsen/logrus
   version: 55eb11d21d2a31a3cc93838241d04800f52e823d
   subpackages:
@@ -201,10 +190,17 @@ imports:
   version: 8e7dc108ab3a1ab6ce6d922bbaff5657b88e8e49
   repo: https://github.com/spf13/pflag
   vcs: git
+- name: github.com/teamhephy/controller-sdk-go
+  version: a1ffb4886a5f7f92fdd710b99e68c2555b74a703
+  subpackages:
+  - api
+  - hooks
+  - pkg/time
 - name: github.com/teamhephy/pkg
   version: 777f37a30108edaf6a2bd4e423cde34ec12870fd
   subpackages:
   - log
+  - prettyprint
   - time
 - name: github.com/ugorji/go
   version: f4485b318aadd133842532f841dc205a8e339d74
@@ -218,7 +214,7 @@ imports:
   - ed25519/internal/edwards25519
   - ssh
 - name: golang.org/x/net
-  version: c2528b2dd8352441850638a8bb678c2ad056fd3e
+  version: 4876518f9e71663000c348837735820161a42df7
   subpackages:
   - context
   - context/ctxhttp
@@ -235,16 +231,9 @@ imports:
   - jws
   - jwt
 - name: golang.org/x/text
-  version: 2910a502d2bf9e43193af9d68ca516529614eed3
+  version: cbf43d21aaebfdfeb81d91a5f444d13a3046e686
   subpackages:
-  - cases
-  - internal/tag
-  - language
-  - runes
-  - secure/bidirule
-  - secure/precis
   - transform
-  - unicode/bidi
   - unicode/norm
   - width
 - name: google.golang.org/api

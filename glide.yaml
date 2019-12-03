@@ -15,6 +15,7 @@ import:
 - package: gopkg.in/yaml.v2
   version: eca94c41d994ae2215d455ce578ae6e2dc6ee516
 - package: github.com/pborman/uuid
+  version: e790cca94e6cc75c7064b1332e63811d4aae1a53
 - package: github.com/teamhephy/pkg
   version: 777f37a30108edaf6a2bd4e423cde34ec12870fd
   subpackages:
@@ -22,13 +23,16 @@ import:
   - log
 - package: github.com/codegangsta/cli
   version: a65b733b303f0055f8d324d805f393cd3e7a7904
+- package: bitbucket.org/ww/goautoneg
+  version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
+  vcs: hg
 - package: k8s.io/kubernetes
   version: 1.2.4
 - package: github.com/arschles/assert
   version: 6882f85ccdc7c1822b146d1a6b0c2c48f91b5140
 - package: github.com/docker/distribution
-  repo: https://github.com/teamhephy/distribution
-  version: 0afef00d5764404d70f86076f364551657d51de6
+  repo: https://github.com/jfuechsl/distribution
+  version: 17bfe45724daa3b4d14314aeba34700ed286b02f
   vcs: git
 - package: speter.net/go/exp/math/dec/inf
   repo: https://github.com/belua/inf
